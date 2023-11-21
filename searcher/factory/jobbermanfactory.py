@@ -2,7 +2,7 @@ from abstractfactory import Factory
 from searcher.search.jobbermansearch import JobberMan
 
 
-class Jobbermanfactory(Factory):
+class JobbermanFactory(Factory):
 
-    def create(self,):
+    def create(self):
         return JobberMan()
