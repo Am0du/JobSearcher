@@ -1,4 +1,4 @@
-from searcher.factory.abstractfactory import Factory
+from searcher.factory.jobfactory import Factory
 from searcher.search.indeedsearch import Indeed
 
 class IndeedFactory(Factory):

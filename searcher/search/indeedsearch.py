@@ -1,4 +1,4 @@
-from searcher.search.abstractsearch import Search
+from searcher.search.searchinterface import Search
 
 class Indeed(Search):
 

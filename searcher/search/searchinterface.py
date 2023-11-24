@@ -4,5 +4,5 @@ class Search(ABC):
 
 
     @abstractmethod
-    def job_search(self, location, job_title):
+    def search(self, location, job_title):
         pass
