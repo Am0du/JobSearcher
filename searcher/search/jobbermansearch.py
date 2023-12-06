@@ -1,17 +1,60 @@
 import requests
 from bs4 import BeautifulSoup
-
 from searcher.search.searchinterface import Search
+
+
+OPTIONS = {
+    'accounting': 'accounting-auditing-finance',
+    'admin': 'admin-office',
+    'building': 'building-architecture',
+    'community': 'community-social-services',
+    'consulting': 'consulting-strategy',
+    'creative': 'creative-design',
+    'customer': 'customer-service-support',
+    'driver': 'driver-transport-services',
+    'engineering': 'engineering-technology',
+    'estate': 'estate-agents-property-management',
+    'farming': 'farming-agriculture',
+    'food': 'food-services-catering',
+    'health': 'health-safety',
+    'hospitality': 'hospitality-leisure',
+    'hr': 'human-resources',
+    'legal': 'legal-services',
+    'management': 'management-business-development',
+    'marketing': 'marketing-communications',
+    'medical': 'medical-pharmaceutical',
+    'product': 'product-project-management',
+    'quality': 'quality-control-assurance',
+    'research,': 'research,-teaching-training',
+    'sales': 'sales',
+    'tech': 'software-data',
+    'supply': 'supply-chain-procurement',
+    'trades': 'trades-services'
+}
+
+KEYS = ['accounting', 'admin', 'building', 'community', 'consulting', 'creative', 'customer', 'driver', 'engineering',
+        'estate', 'farming', 'food', 'health', 'hospitality', 'human', 'legal', 'management', 'marketing', 'medical',
+        'product', 'quality', 'research,', 'sales', 'tech', 'supply', 'trades', 'it', 'pharmacy']
+
+
+def title_selector(job_title):
+    ''' Ensure the job_title is passed in the right format '''
+    job_title = job_title.lower().split()
+
+    for key in KEYS:
+        if job_title[0] == key:
+            return OPTIONS[key]
 
 
 class JobberMan(Search):
 
     def search(self, location, job_title):
         """Seacrhes jobberman with specified location and job title"""
-
-         # Todo: parse job_title to make it compatible with jobberan title
-
-        _response = requests.get(url=f'https://www.jobberman.com/jobs/{job_title}/{location}').text
+        jb = title_selector(job_title)
+        if jb is None:
+            _response = requests.get(url=f'https://www.jobberman.com/jobs/{location}').text
+        else:
+            _response = requests.get(url=f'https://www.jobberman.com/jobs/{job_title}/{location}').text
 
         _soup = BeautifulSoup(_response, 'lxml')
 
