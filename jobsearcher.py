@@ -3,6 +3,11 @@ from searcher.factory.jobbermanfactory import JobbermanFactory
 from concurrent.futures import ThreadPoolExecutor
 
 
+def job_search(provider, location, job_title):
+    """A """
+    return provider.search(location, job_title)
+
+
 class JobSearcher:
     def __init__(self):
         self.__location = None
