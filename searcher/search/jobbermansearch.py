@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from searchinterface import Search
+from searcher.search.searchinterface import Search
 
 
 class JobberMan(Search):
@@ -46,5 +46,6 @@ class JobberMan(Search):
             jobs.append(job)
 
         return jobs
+
 
 

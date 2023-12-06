@@ -1,4 +1,4 @@
-from jobfactory import Factory
+from searcher.factory.jobfactory import Factory
 from searcher.search.jobbermansearch import JobberMan
 
 
