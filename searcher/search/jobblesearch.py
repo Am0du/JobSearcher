@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 class Jooble(Search):
 
     def search(self, location, job_title):
+        ''' Searches Jooble with specified location and job title '''
+
         url = f'https://ng.jooble.org/SearchResult?p=2&rgns={location}%2C%20FCT&ukw={job_title}'
 
         _response = requests.get(url=url).text

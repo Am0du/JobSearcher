@@ -7,6 +7,10 @@ from searcher.search.searchinterface import Search
 class JobberMan(Search):
 
     def search(self, location, job_title):
+        """Seacrhes jobberman with specified location and job title"""
+
+         # Todo: parse job_title to make it compatible with jobberan title
+
         _response = requests.get(url=f'https://www.jobberman.com/jobs/{job_title}/{location}').text
 
         _soup = BeautifulSoup(_response, 'lxml')
