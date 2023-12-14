@@ -70,7 +70,6 @@ class JobberMan(Search):
         _job_salary = _soup.find_all(name='span', class_='mr-1')
         _job_salary = [job_salary.get_text(strip=True) for job_salary in _job_salary]
 
-
         # Job Summary
         _job_summaries = _soup.find_all(name='p', class_='md:pl-5')
         _job_summaries = [job_summary.get_text(strip=True) for job_summary in _job_summaries]
@@ -79,7 +78,6 @@ class JobberMan(Search):
         _job_links = _soup.find_all(name='p', class_='text-link-500')
         _job_links = [job_link.find('a') for job_link in _job_links]
         _job_link = [f"https://www.jobberman.com{link.get('href')}" for link in _job_links if link is not None]
-
 
         jobs = []
         for i in range(len(_job_employer)):
