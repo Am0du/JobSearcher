@@ -54,7 +54,7 @@ class JobberMan(Search):
         if jb is None:
             _response = requests.get(url=f'https://www.jobberman.com/jobs/{location}').text
         else:
-            _response = requests.get(url=f'https://www.jobberman.com/jobs/{job_title}/{location}').text
+            _response = requests.get(url=f'https://www.jobberman.com/jobs/{jb}/{location}').text
 
         _soup = BeautifulSoup(_response, 'lxml')
 
@@ -94,3 +94,6 @@ class JobberMan(Search):
 
 
 
+jb = JobberMan()
+
+print(jb.search('abuja', 'tech'))
