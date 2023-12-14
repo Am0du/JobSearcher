@@ -78,7 +78,6 @@ class JobberMan(Search):
         _job_links = _soup.find_all(name='p', class_='text-link-500')
         _job_links = [job_link.find('a') for job_link in _job_links]
         _job_link = [f"https://www.jobberman.com{link.get('href')}" for link in _job_links if link is not None]
-
         jobs = []
         for i in range(len(_job_employer)):
             job = {'title': _job_titles[i],
@@ -86,8 +85,11 @@ class JobberMan(Search):
                    'salary': _job_salary[i],
                    'description': _job_summaries[i],
                    'location': location,
-                   'link': _job_link
+                   'link': _job_link[i]
                    }
             jobs.append(job)
-
         return jobs
+
+
+jb = JobberMan()
+jb.search('abuja', 'tech')
