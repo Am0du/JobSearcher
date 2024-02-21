@@ -90,6 +90,3 @@ class JobberMan(Search):
             jobs.append(job)
         return jobs
 
-
-jb = JobberMan()
-jb.search('abuja', 'tech')

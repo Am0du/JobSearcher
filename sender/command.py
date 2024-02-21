@@ -16,11 +16,10 @@ class Command(CommandInterface):
         if data['status']:
             return True
         else:
-           return False
+            return False
 
     # def reverse(self, uid):
     #     pass
 
     def insert(self, args):
-        self.model.insert(args)
-
+        return str(self.model.insert(args))

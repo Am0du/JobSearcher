@@ -6,6 +6,7 @@ from email import encoders
 import pandas as pd
 from sender.model import Model
 import os
+import uuid
 
 
 class Emailer:
@@ -14,6 +15,7 @@ class Emailer:
         self._email_pass = os.environ.get('email_password')
         self._message = MIMEMultipart()
         self._model = Model()
+        self._unique = str(uuid.uuid4())
 
     def make_csv(self, uid: str):
         """from the Job content in the db, a csv file is created for emailing"""
@@ -22,12 +24,13 @@ class Emailer:
         job_content = data['job_content']
         job_title = data['job_search']
         df = pd.DataFrame(job_content)
-        df.to_csv(f'../sender/Temp_file/{job_title}.csv', index=False)
+        df.to_csv(f'../sender/Temp_file/{job_title + self._unique}.csv', index=False)
         self.send_mail(email_add, job_title, uid)
 
     def send_mail(self, email_add: str, job_title: str, uid: str):
         """"Structures the parameters for emailing """
         # Email message
+        print('fdggdf')
         body = 'Your Jobsearch csv is ready'
         self._message['From'] = self._email_add
         self._message['To'] = email_add
@@ -35,7 +38,7 @@ class Emailer:
 
         self._message.attach(MIMEText(body, 'plain'))
 
-        filename = f'../sender/Temp_file/{job_title}.csv'
+        filename = f'../sender/Temp_file/{job_title + self._unique}.csv'
 
         attachment = open(filename, 'rb')
 
@@ -50,6 +53,7 @@ class Emailer:
             connection.sendmail(from_addr=self._email_add, to_addrs=email_add, msg=self._message.as_string())
 
         self.update_status(uid, {'status': 'True'})
+
 
     def update_status(self, uid: str, value: dict) -> bool:
         """Updates the status in the db after emailing """

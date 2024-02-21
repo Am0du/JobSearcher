@@ -37,6 +37,3 @@ class JobSearcher:
 
         return job_list
 
-
-jb = JobSearcher()
-jb.searcher('abuja', 'software-data')
